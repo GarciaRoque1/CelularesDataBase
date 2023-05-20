@@ -1,0 +1,97 @@
+"""Tipo de personas"""
+type Personas {
+
+  idpersonas: ID
+  nombre: String
+
+}
+
+""" Tipo de celulares """
+type Celulares {
+
+  idcelulares: ID
+  telefono: String
+
+  fk_precios: Int
+  precio: Precios
+  
+  fk_modelos: Int
+  modelo: Modelos
+  
+}
+
+"""Tipo de precios"""
+type Precios{
+
+  idprecios: ID
+  precio: Int
+
+}
+
+"""Tipo de Modelos"""
+type Modelos{
+
+  idmodelos: ID
+  modelo: String
+
+}
+
+""" Conexion de las personas y celulares """
+type CelularPersona{
+
+  idcelularpersona: ID!
+
+  personas: Personas
+  fk_personas: Int
+
+  celulares: Celulares
+  fk_celulares: Int
+
+}
+
+input inputpersonas{
+  nombre: String
+}
+input inputmodelos{
+  modelo: String
+}
+input inputprecios{
+  precio: Int 
+}
+input inputcelulares{
+  telefono: String
+  fk_precios: Int
+  fk_modelos: Int
+}
+input inputcelularespersonas{
+  fk_personas: Int
+  fk_celulares: Int
+}
+
+type Query {
+  personas: [Personas]
+  precios: [Precios]
+  celulares: [Celulares]
+  modelos: [Modelos]
+  celularespersonas(idcelularpersona: Int!): [CelularPersona]
+}
+
+type Mutation{
+  addpersonas(input: inputpersonas!): Personas
+  addmodelos(input: inputmodelos!): Modelos
+  addprecios(input: inputprecios!): Precios
+  addcelulares(input: inputcelulares!): Celulares
+  addcelularespersonas(input: inputcelularespersonas!): CelularPersona
+
+  delpersonas(idpersonas: Int!): Personas
+  delmodelos(idmodelos: Int!): Modelos
+  delprecios(idprecios: Int!): Precios
+  delcelulares(idcelulares: Int!): Celulares
+  delcelularespersonas(idcelularpersona: Int!): CelularPersona
+
+  updpersonas(idpersonas: Int!, input: inputpersonas!): Personas
+  updmodelos(idmodelos: Int!, input: inputmodelos!): Modelos
+  updprecios(idprecios: Int!, input: inputprecios!): Precios
+  updcelulares(idcelulares: Int!, input: inputcelulares!): Celulares
+  updcelularespersonas(idcelularpersona: Int!, inputcelularespersonas!)
+}

@@ -1,0 +1,6 @@
+use celulares;
+select * from celulares;
+select * from celulares.modelos;
+select * from celulares.precios;
+select * from celulares.personas;
+select * from celulares.celularespersonas
